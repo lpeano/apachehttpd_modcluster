@@ -79,7 +79,15 @@ build_modules()
 
 
 }
+package()
+{
+	cd $InstallDir
+	tar zcvf httpd.tar.gz httpd
+	cd -
+	mkdir build ;cp $InstallDir/httpd.tar.gz build/
+}
 ARGS=$1
+InstallDir=${2:-/tmp/apache/}
 case "$ARGS" in 
 "download")
 		download
@@ -104,6 +112,9 @@ case "$ARGS" in
 ;;
 "build_modules")
 		build_modules
+;;
+"package")
+		package
 ;;
 "all")
 	download
