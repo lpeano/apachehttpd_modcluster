@@ -105,4 +105,14 @@ case "$ARGS" in
 "build_modules")
 		build_modules
 ;;
+"all")
+	download
+	packages
+	extract
+	apacheconfig
+	build
+	install
+	clone_mod_cluster
+	build_modules
+;;
 esac
