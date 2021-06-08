@@ -64,7 +64,6 @@ clone_mod_cluster()
 
 build_modules()
 {
-	InstallDir=/tmp/apache/
 	cd mod_cluster/native
         for p in advertise mod_manager mod_proxy_cluster mod_cluster_slotmem
         do
