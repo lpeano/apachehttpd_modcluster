@@ -24,8 +24,7 @@ cd ../../
 apacheconfig()
 {
 	cd httpd-2.4.46
-	./configure --prefix=apache_installation_directory \
-             --with-mpm=worker \
+	./configure --with-mpm=worker \
              --enable-mods-shared=most \
              --enable-maintainer-mode \
              --enable-ssl \
@@ -47,7 +46,7 @@ build()
 
 install(){
 	cd httpd-2.4.46
-	export DESTDIR=/tmp/apache/
+	export DESTDIR=$InstallDir
 	make -e  install
 	cd -
 }
@@ -59,6 +58,7 @@ clone_mod_cluster()
 	cd mod_cluster
 	git checkout 1.3.1.Final
        	mvn package -Dmaven.compiler.target=1.8
+	cd -
 
 }
 
@@ -76,7 +76,7 @@ build_modules()
                 cd -
         done
 
-
+	cd ../..
 }
 package()
 {
@@ -116,13 +116,14 @@ case "$ARGS" in
 		package
 ;;
 "all")
-	download
-	packages
-	extract
-	apacheconfig
-	build
+	#download
+	#packages
+	#extract
+	#apacheconfig
+	#build
 	install
 	clone_mod_cluster
 	build_modules
+	package
 ;;
 esac
