@@ -2,7 +2,8 @@
 __Install.bash__
 
 Scritp to build apache 2.4.46 with mod_cluster modules
-Run with command:
+
+Run the build with command:
 ```  
   bash Install.bash all
 ```
