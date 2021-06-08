@@ -85,6 +85,15 @@ package()
 	cd -
 	mkdir build ;cp $InstallDir/httpd.tar.gz build/
 }
+buildjarPkgs()
+{
+	git clone https://github.com/modcluster/mod_cluster.git
+        cd mod_cluster
+	git checkout $(git tag |grep Final|tail -1)
+        mvn package -Dmaven.compiler.target=1.8
+        cd -	
+	tar zcvf $InstallDir/modcluster-dist-target.tar.gz mod_cluster/dist/target
+}
 ARGS=$1
 InstallDir=${2:-/tmp/apache/}
 case "$ARGS" in 
@@ -115,6 +124,9 @@ case "$ARGS" in
 "package")
 		package
 ;;
+"buildjarPkgs")
+	buildjarPkgs
+;;
 "all")
 	#download
 	#packages
@@ -125,5 +137,6 @@ case "$ARGS" in
 	clone_mod_cluster
 	build_modules
 	package
+	buildjarPkgs
 ;;
 esac
